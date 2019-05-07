@@ -6,9 +6,9 @@ import com.example.weathermvvm.internal.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class ConectivityInterceptorImpl(
+class ConnectivityInterceptorImpl(
     context: Context
-) : ConectivityInterceptor {
+) : ConnectivityInterceptor {
 
     private val appContext = context.applicationContext
 

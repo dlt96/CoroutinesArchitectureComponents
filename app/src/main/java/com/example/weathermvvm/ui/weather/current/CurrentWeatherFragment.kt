@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 
 import com.example.weathermvvm.R
 import com.example.weathermvvm.data.network.ApixuWeatherApiService
-import com.example.weathermvvm.data.network.ConectivityInterceptorImpl
+import com.example.weathermvvm.data.network.ConnectivityInterceptorImpl
 import com.example.weathermvvm.data.network.WeatherNetworkDataSourceImpl
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +36,7 @@ class CurrentWeatherFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
         // TODO: Use the ViewModel
-        val apiService = ApixuWeatherApiService(ConectivityInterceptorImpl(this.context!!))
+        val apiService = ApixuWeatherApiService(ConnectivityInterceptorImpl(this.context!!))
         val weatherNetworkDataSource = WeatherNetworkDataSourceImpl(apiService)
 
         weatherNetworkDataSource.downloadedCurrentWeather.observe(this, Observer {

@@ -24,7 +24,7 @@ interface ApixuWeatherApiService {
 
     companion object {
         operator fun invoke(
-            connectivityInterceptor: ConectivityInterceptor
+            connectivityInterceptor: ConnectivityInterceptor
         ): ApixuWeatherApiService {
             val requestInterceptor = Interceptor { chain ->
                 val url = chain.request()
