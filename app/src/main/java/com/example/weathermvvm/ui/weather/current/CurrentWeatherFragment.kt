@@ -49,12 +49,19 @@ class CurrentWeatherFragment : BaseScopedFragment(), KodeinAware {
 
     private fun bindUI() = launch {
         val currentWeather = viewModel.weather.await()
+
+        val weatherLocation = viewModel.weatherLocation.await()
+
+        weatherLocation.observe(this@CurrentWeatherFragment, Observer {location ->
+            if (location == null) return@Observer
+            updateLocation(location.name)
+        })
+
         currentWeather.observe(this@CurrentWeatherFragment, Observer {
             if (it == null) return@Observer
 
 
             group_loading.visibility = View.GONE
-            updateLocation("Los Angeles")
             updateDateToToday()
             updateTemperatures(it.temperature, it.feelsLikeTemperature)
             updateCondition(it.conditionText)
@@ -65,14 +72,14 @@ class CurrentWeatherFragment : BaseScopedFragment(), KodeinAware {
         })//shouldn't the ViewModel be doing this instead of the Fragment
     }
 
+    private fun chooseLocalizedUnitAbbreviation(metric: String, imperial: String): String {
+        return if (viewModel.isMetric) metric else imperial
+    }
+
     private fun updateWeatherImage(imageURL: String) {
         GlideApp.with(this@CurrentWeatherFragment)
             .load("https:${imageURL}")
             .into(imageView_condition_icon)
-    }
-
-    private fun chooseLocalizedUnitAbbreviation(metric: String, imperial: String): String {
-        return if (viewModel.isMetric) metric else imperial
     }
 
     private fun updateLocation(location: String) {
