@@ -1,9 +1,7 @@
 package com.example.weathermvvm.data.db
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import com.example.weathermvvm.data.db.entity.CurrentWeatherEntry
 import com.example.weathermvvm.data.db.entity.WeatherLocation
 
@@ -12,9 +10,10 @@ import com.example.weathermvvm.data.db.entity.WeatherLocation
     version = 1,
     exportSchema = false
 )
+@TypeConverters(LocalDateConverter::class)//automatically converts Date to string
 abstract class ForecastDatabase : RoomDatabase() {
     abstract fun currentWeatherDao(): CurrentWeatherDao
-
+    abstract fun futureWeatherDao(): FutureWeatherDao
     abstract fun weatherLocationDao(): WeatherLocationDao
 
     companion object {
@@ -31,7 +30,6 @@ abstract class ForecastDatabase : RoomDatabase() {
                 context.applicationContext,
                 ForecastDatabase::class.java,
                 "forecast.db"
-            )
-                .build()
+            ).build()
     }
 }
