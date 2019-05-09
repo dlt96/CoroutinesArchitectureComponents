@@ -46,10 +46,12 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-        requestLocationPermission()
+        requestLocationPermission()//if granted not called
 
         if (hasLocationPermission()) {
             bindLocationManager()
+        } else {
+            requestLocationPermission()
         }
     }
 
@@ -77,10 +79,16 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         )
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (grantResults.isEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            bindLocationManager()
-        else
-            Toast.makeText(this, "Please, set location manually in settings", Toast.LENGTH_LONG).show()
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == MY_PERMISSION_ACCESS_COARSE_LOCATION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                bindLocationManager()
+            else
+                Toast.makeText(this, "Please, set location manually in settings", Toast.LENGTH_LONG).show()
+        }
     }
 }

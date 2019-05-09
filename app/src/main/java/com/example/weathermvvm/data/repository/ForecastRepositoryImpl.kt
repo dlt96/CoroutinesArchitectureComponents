@@ -21,6 +21,7 @@ class ForecastRepositoryImpl(
     private val weatherNetworkDatasource: WeatherNetworkDataSource,
     private val locationProvider: LocationProvider
 ) : ForecastRepository {
+
     override suspend fun getWeatherLocation(): LiveData<WeatherLocation> {
          return withContext(Dispatchers.IO) {
              return@withContext weatherLocationDao.getLocation()
