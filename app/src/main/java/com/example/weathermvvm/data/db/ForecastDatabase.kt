@@ -3,10 +3,11 @@ package com.example.weathermvvm.data.db
 import android.content.Context
 import androidx.room.*
 import com.example.weathermvvm.data.db.entity.CurrentWeatherEntry
+import com.example.weathermvvm.data.db.entity.FutureWeatherEntry
 import com.example.weathermvvm.data.db.entity.WeatherLocation
 
 @Database(
-    entities = [CurrentWeatherEntry::class, WeatherLocation::class],
+    entities = [CurrentWeatherEntry::class, FutureWeatherEntry::class, WeatherLocation::class],
     version = 1,
     exportSchema = false
 )

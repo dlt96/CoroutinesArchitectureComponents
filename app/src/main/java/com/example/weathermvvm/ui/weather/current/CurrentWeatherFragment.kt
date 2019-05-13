@@ -65,7 +65,7 @@ class CurrentWeatherFragment : BaseScopedFragment(), KodeinAware {
     }
 
     private fun chooseLocalizedUnitAbbreviation(metric: String, imperial: String): String {
-        return if (viewModel.isMetric) metric else imperial
+        return if (viewModel.isMetricUnit) metric else imperial
     }
 
     private fun updateWeatherImage(imageURL: String) {

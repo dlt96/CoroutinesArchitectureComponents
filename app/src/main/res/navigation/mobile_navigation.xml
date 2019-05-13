@@ -10,11 +10,17 @@
               android:name="com.example.weathermvvm.ui.weather.current.CurrentWeatherFragment"
               android:label="current_weather_fragment" tools:layout="@layout/current_weather_fragment"/>
     <fragment android:id="@+id/futureListWeatherFragment"
-              android:name="com.example.weathermvvm.ui.weather.future.FutureListWeatherFragment"
-              android:label="future_list_weather_fragment" tools:layout="@layout/future_list_weather_fragment"/>
+              android:name="com.example.weathermvvm.ui.weather.future.list.FutureListWeatherFragment"
+              android:label="future_list_weather_fragment" tools:layout="@layout/future_list_weather_fragment">
+        <action android:id="@+id/actionDetail"
+                app:destination="@id/futureDetailWeatherFragment"/>
+    </fragment>
     <fragment android:id="@+id/futureDetailWeatherFragment"
-              android:name="com.example.weathermvvm.ui.weather.detail.FutureDetailWeatherFragment"
-              android:label="future_detail_weather_fragment" tools:layout="@layout/future_detail_weather_fragment"/>
+              android:name="com.example.weathermvvm.ui.weather.future.detail.FutureDetailWeatherFragment"
+              android:label="future_detail_weather_fragment"
+    >
+        <argument android:name="dateString" app:argType="string"/>
+    </fragment>
     <fragment android:id="@+id/settingsFragment" android:name="com.example.weathermvvm.ui.settings.SettingsFragment"
               android:label="SettingsFragment"/>
 </navigation>

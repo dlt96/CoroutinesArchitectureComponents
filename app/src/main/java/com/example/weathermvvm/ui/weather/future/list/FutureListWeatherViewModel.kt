@@ -1,16 +1,17 @@
-package com.example.weathermvvm.ui.weather.current
+package com.example.weathermvvm.ui.weather.future.list
 
 import com.example.weathermvvm.data.provider.UnitProvider
 import com.example.weathermvvm.data.repository.ForecastRepository
 import com.example.weathermvvm.internal.lazyDeferred
 import com.example.weathermvvm.ui.base.BaseWeatherViewModel
+import org.threeten.bp.LocalDate
 
-class CurrentWeatherViewModel(
+class FutureListWeatherViewModel(
     forecastRepository: ForecastRepository,
     unitProvider: UnitProvider
 ) : BaseWeatherViewModel(forecastRepository, unitProvider) {
 
-    val weather by lazyDeferred {
-        forecastRepository.getCurrentWeather(super.isMetricUnit)
+    val weatherEntries by lazyDeferred {
+        forecastRepository.getFutureWeatherList(LocalDate.now(), super.isMetricUnit)
     }
 }
